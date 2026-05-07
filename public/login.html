@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In — Malzz Hosting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <style>
+    .login-floating-label {
+      position: relative;
+    }
+    .login-floating-label input {
+      padding-top: 20px;
+      padding-bottom: 8px;
+    }
+    .login-floating-label label {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      pointer-events: none;
+    }
+    .login-floating-label input:focus ~ label,
+    .login-floating-label input:not(:placeholder-shown) ~ label {
+      top: 6px;
+      font-size: 10px;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="orb orb-blue"></div>
+<div class="orb orb-purple"></div>
+
+<div class="login-page">
+  <div style="width:100%;max-width:420px;">
+    <!-- Back link -->
+    <div style="margin-bottom:24px;">
+      <a href="/" style="display:inline-flex;align-items:center;gap:6px;color:var(--text-muted);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to home
+      </a>
+    </div>
+
+    <div class="login-card">
+      <!-- Logo -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px;">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 24px rgba(59,130,246,0.4);">🚀</div>
+        <div>
+          <div style="font-size:18px;font-weight:800;letter-spacing:-0.5px;">Malzz<span style="color:var(--accent);">Hosting</span></div>
+          <div style="font-size:11px;color:var(--text-muted);">Management Panel</div>
+        </div>
+      </div>
+
+      <h1 style="font-size:26px;font-weight:800;letter-spacing:-0.8px;margin-bottom:6px;">Welcome back</h1>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:32px;">Sign in to your admin dashboard</p>
+
+      <form id="login-form" autocomplete="off">
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;">
+          <div class="input-group">
+            <label class="input-label">Username</label>
+            <div class="input-icon-wrapper">
+              <svg class="input-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input class="input" type="text" id="username" name="username" placeholder="Enter username" autocomplete="username" required/>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Password</label>
+            <div class="input-icon-wrapper" style="position:relative;">
+              <svg class="input-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input class="input" type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password" required style="padding-right:44px;"/>
+              <button type="button" id="toggle-pw" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;padding:0;" onclick="togglePassword()">
+                <svg id="pw-icon-hide" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                <svg id="pw-icon-show" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+            <input type="checkbox" id="remember" name="remember" style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;"/>
+            <label for="remember" style="font-size:13px;color:var(--text-secondary);cursor:pointer;">Remember this session</label>
+          </div>
+        </div>
+
+        <div id="error-msg" style="display:none;padding:12px 14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;font-size:13px;color:var(--danger);margin-bottom:16px;"></div>
+
+        <button type="submit" class="btn btn-primary" id="login-btn" style="width:100%;justify-content:center;height:46px;font-size:15px;">
+          Sign In
+        </button>
+      </form>
+
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);text-align:center;">
+        <p style="font-size:12px;color:var(--text-muted);">Secured by JWT Authentication &amp; Firebase</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="/js/utils.js"></script>
+<script>
+  // Redirect if already logged in
+  if (API.getToken() && API.getUser()) {
+    window.location.href = '/dashboard.html';
+  }
+
+  function togglePassword() {
+    const pw = document.getElementById('password');
+    const hide = document.getElementById('pw-icon-hide');
+    const show = document.getElementById('pw-icon-show');
+    if (pw.type === 'password') {
+      pw.type = 'text';
+      hide.style.display = 'none';
+      show.style.display = 'block';
+    } else {
+      pw.type = 'password';
+      hide.style.display = 'block';
+      show.style.display = 'none';
+    }
+  }
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('login-btn');
+    const errEl = document.getElementById('error-msg');
+    errEl.style.display = 'none';
+    Utils.setLoading(btn);
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    const res = await API.post('/auth/login', { username, password });
+    Utils.setLoading(btn, false);
+
+    if (res.success) {
+      API.setToken(res.token);
+      API.setUser(res.user);
+      Toast.success('Welcome back!', `Logged in as ${res.user.username}`);
+      setTimeout(() => window.location.href = '/dashboard.html', 600);
+    } else {
+      errEl.textContent = res.message || 'Login failed. Please check your credentials.';
+      errEl.style.display = 'block';
+      // Shake animation
+      const card = document.querySelector('.login-card');
+      card.style.animation = 'none';
+      card.style.transform = 'translateX(-8px)';
+      setTimeout(() => { card.style.transition = 'transform 0.4s cubic-bezier(0.36,0.07,0.19,0.97)'; card.style.transform = 'translateX(0)'; }, 50);
+    }
+  });
+</script>
+</body>
+</html>
